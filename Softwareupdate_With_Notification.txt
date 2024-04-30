@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Step 1: Download the latest macOS update
+echo "Checking for macOS updates..."
+softwareupdate -l
+
+echo "Downloading the latest macOS update. Please wait..."
+softwareupdate -d --all
+
+# Check if the download was successful or if there are updates to install
+updatesAvailable=$(softwareupdate -l)
+if [[ $updatesAvailable == *"No new software available."* ]]; then
+  echo "No updates are available to install."
+  exit 0
+fi
+
+# Step 2: Prompt the user with osascript
+userChoice=$(osascript <<EOD
+tell app "System Events"
+    set userChoice to button returned of (display dialog "The macOS update is ready to install. Do you want to install now?" buttons {"Defer", "Install"} default button "Install")
+end tell
+userChoice
+EOD
+)
+
+# Check the user choice
+if [ "$userChoice" = "Install" ]; then
+    # Step 3: Install the macOS update
+    echo "Installing the macOS update. The system will restart as part of the installation process."
+    sudo softwareupdate -iaR --agree-to-license
+
+    # Optionally, you might want to ensure the system reboots by issuing a reboot command
+    echo "Rebooting now to complete the installation."
+    sudo reboot
+else
+    echo "Update installation deferred."
+fi
