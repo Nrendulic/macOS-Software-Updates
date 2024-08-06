@@ -6,17 +6,17 @@ This page will be expanded as new scripts and tips are developed. Check back reg
 
 Current Scripts:
 
-**1. Automated macOS Update Installation with Warning:**
+# 1. Automated macOS Update Installation with Warning:
 This script checks for available macOS updates, downloads them, and notifies the user that the system will shut down in 5 minutes to complete the installation. It then proceeds to install the updates and reboots the system.
 
-# Usage:
+Usage:
 
 Download Updates: The script begins by checking for and downloading the latest macOS updates.
 User Notification: It uses osascript to display a dialog warning the user that the system will shut down in 5 minutes for installation.
 Install Updates: The script installs the updates and initiates a system restart.
 
 
-**2. macOS Update with User Choice:**
+# 2. macOS Update with User Choice:
 This script also checks for and downloads macOS updates but gives the user the option to defer the installation. It provides a dialog box allowing the user to choose between installing the update immediately or deferring it.
 
 Usage:
